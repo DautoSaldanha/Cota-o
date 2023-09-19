@@ -1,2 +1,2 @@
-# Cota-o
+# Cotacao
 Cotação do dólar
