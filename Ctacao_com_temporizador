@@ -1,0 +1,31 @@
+import requests
+from datetime import datetime
+import time
+
+contagem = 0
+
+while True:
+    requisicao = requests.get('http://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL')
+    requisicao_dic = requisicao.json()
+    
+    cotacao_dolar = requisicao_dic['USDBRL']['bid']
+    
+    # Tempo da última atualização
+    tempo_ultima_atualizacao = datetime.now()
+    
+    # Tempo atual
+    tempo_atual = datetime.now()
+    
+    # Calcular o tempo decorrido em minutos
+    diff = tempo_atual - tempo_ultima_atualizacao
+    minutos_passados = int(diff.total_seconds() / 60)
+    
+    # Exibir a mensagem com a contagem de atualizações
+    print(f'Atualizado a {contagem} minutos')
+    print(f'A cotação atual do Dólar é: R$ {cotacao_dolar}')
+    
+    # Aumentar a contagem a cada atualização
+    contagem += 1
+    
+    # Aguardar 1800 segundos (30 minutos) antes da próxima atualização
+    time.sleep(60)
